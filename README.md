@@ -44,6 +44,14 @@ laravel-project/
             |-- helper.php
             |-- module.php
 ```
+
+## Config 
+
+Getting to module management config file:
+```
+php artisan vendor:publish
+```
+
 ### General
 
 Based on [L5 Modular](https://github.com/Artem-Schander/L5Modular), thanks to Artem Schander.
