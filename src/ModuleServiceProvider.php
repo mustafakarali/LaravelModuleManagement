@@ -33,13 +33,11 @@ class ModuleServiceProvider extends ServiceProvider {
 			$modules = config("modulemanagement.enabledModules") ?: array_map('class_basename', $this->files->directories(app_path().'/Modules/'));
 			foreach($modules as $module)  {
 				
-				$json = app_path().'/Modules/'.$module.'/module.php';
 				$routes = app_path().'/Modules/'.$module.'/routes.php';
 				$helper = app_path().'/Modules/'.$module.'/helper.php';
 				$views  = app_path().'/Modules/'.$module.'/Views';
 				$trans  = app_path().'/Modules/'.$module.'/Translations';
 
-				if($this->files->exists($json)) include $json;
 				if($this->files->exists($routes)) include $routes;
 				if($this->files->exists($helper)) include $helper;
 				if($this->files->isDirectory($views)) $this->loadViewsFrom($views, $module);
