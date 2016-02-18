@@ -22,9 +22,15 @@ class ModuleServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 
+
+		// php artisan vendor:publish
+		$this->publishes([__DIR__.'/Config/modulemanagement.php' => config_path('modulemanagement.php'),
+		], 'config');
+
+
 		if(is_dir(app_path().'/Modules/')) {
 
-			$modules = config("modules.enable") ?: array_map('class_basename', $this->files->directories(app_path().'/Modules/'));
+			$modules = config("modulemanagement.enabledModules") ?: array_map('class_basename', $this->files->directories(app_path().'/Modules/'));
 			foreach($modules as $module)  {
 				
 				$json = app_path().'/Modules/'.$module.'/module.php';
