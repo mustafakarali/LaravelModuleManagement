@@ -1,1 +1,6 @@
-TEEEST
+{
+	name: "Text",
+	description: "Another text",
+	creator: "Another text"
+	customer: "General"
+}
