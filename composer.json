@@ -4,7 +4,7 @@
     "keywords": ["laravel", "pattern", "modular", "modules", "structure", "Furkan", "Kadıoğlu", "l5module", "artisan", "generator"],
     "homepage": "https://github.com/furkankadioglu/LaravelModuleManagement",
     "license": "MIT",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "authors": [
         {
             "name": "Furkan Kadıoğlu",
