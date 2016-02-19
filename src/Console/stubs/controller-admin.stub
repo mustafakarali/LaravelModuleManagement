@@ -32,7 +32,18 @@ class DummyAdminClass extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
+	{
+		$postCategory = $request->get('postCategory');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  string  $id
+	 * @return Response
+	 */
+	public function show($id)
 	{
 		//
 	}
@@ -40,10 +51,24 @@ class DummyAdminClass extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  string  $id
+	 * @param  string  $did
 	 * @return Response
 	 */
-	public function show($id)
+	public function doubleShow($id, $did)
+	{
+
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  string  $id
+	 * @param  string  $did
+	 * @param  string  $tid
+	 * @return Response
+	 */
+	public function tripleShow($id, $did, $tid)
 	{
 		//
 	}
