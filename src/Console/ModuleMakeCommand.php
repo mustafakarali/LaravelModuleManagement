@@ -176,6 +176,17 @@ class ModuleMakeCommand extends GeneratorCommand {
 
 		if($type == 'controller')
 		{
+			$filename = studly_case(class_basename($this->getNameInput())."Api".ucfirst($type));
+			$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
+			if ($this->files->exists($path = $this->getPath($name))) 
+				return $this->error($this->type.' already exists!');
+
+			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
+
+			$this->makeDirectory($path);
+			$this->files->put($path, $this->buildClass($name));
+
+
 			$filename = studly_case(class_basename($this->getNameInput())."Admin".ucfirst($type));
 			$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
 			if ($this->files->exists($path = $this->getPath($name))) 
