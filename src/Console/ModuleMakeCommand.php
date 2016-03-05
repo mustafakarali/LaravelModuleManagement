@@ -184,7 +184,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
 
 			$this->makeDirectory($path);
-			$this->files->put($path, $this->buildClass($name));
+			$this->files->put($path, $this->buildClass($name, "api"));
 
 
 			$filename = studly_case(class_basename($this->getNameInput())."Admin".ucfirst($type));
@@ -195,7 +195,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-admin.stub';
 
 			$this->makeDirectory($path);
-			$this->files->put($path, $this->buildClass($name));
+			$this->files->put($path, $this->buildClass($name, "admin"));
 		}
 	}
 
@@ -216,10 +216,24 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 * @param  string  $name
 	 * @return string
 	 */
-	protected function buildClass($name)
+	protected function buildClass($name, $type)
 	{
-		$stub = $this->files->get($this->getStub());
-		return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+		if($type == null)
+		{
+			$stub = $this->files->get($this->getStub());
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+		}
+		elseif($type == "admin")
+		{
+			$stub = $this->files->get($this->getStub());
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
+		}
+		elseif($type == "api")
+		{
+			$stub = $this->files->get($this->getStub());
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
+		}
+		
 	}
 
 	/**
@@ -248,6 +262,33 @@ class ModuleMakeCommand extends GeneratorCommand {
 		$class = class_basename($name);
 		return str_replace('DummyClass', $class, $stub);
 	}
+
+	/**
+	 * Replace the class name for the given stub.
+	 *
+	 * @param  string  $stub
+	 * @param  string  $name
+	 * @return string
+	 */
+	protected function replaceAdminClass($stub, $name)
+	{
+		$class = class_basename($name);
+		return str_replace('DummyAdminClass', $class, $stub);
+	}
+
+	/**
+	 * Replace the class name for the given stub.
+	 *
+	 * @param  string  $stub
+	 * @param  string  $name
+	 * @return string
+	 */
+	protected function replaceApiClass($stub, $name)
+	{
+		$class = class_basename($name);
+		return str_replace('DummyApiClass', $class, $stub);
+	}
+
 
 	/**
 	 * Get the stub file for the generator.
