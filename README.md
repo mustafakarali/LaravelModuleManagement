@@ -28,6 +28,7 @@ laravel-project/
         |-- FooBar/
             |-- Controllers/
                 |-- FooBarController.php
+                |-- FooBarApiController.php
                 |-- FooBarAdminController.php
             |-- Models/
                 |-- FooBar.php
