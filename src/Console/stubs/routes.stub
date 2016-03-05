@@ -2,6 +2,14 @@
 
 Route::group(array('module' => 'DummyUCtitle', 'middleware' =>  ['web'], 'namespace' => 'DummyNamespace\Controllers'), function() {
 
+	// Custom Gets
+    Route::get('/admin/modules/DummyTitle', array('uses' => 'DummyUCtitleAdminController@index', 'as' => 'admin.DummyTitle.index'));
+    Route::get('/admin/modules/DummyTitle/{id}', array('uses' => 'DummyUCtitleAdminController@show', 'as' => 'admin.DummyTitle.show'));
+
+    // Custom Posts
+    Route::post('/admin/modules/DummyTitle/', array('uses' => 'DummyUCtitleAdminController@store', 'as' => 'admin.DummyTitle.store'));
+
+	// Resources
     Route::resource('DummyTitle', 'DummyUCtitleController');
-    
+    Route::resource('DummyTitleAPI', 'DummyUCtitleApiController');
 });	
