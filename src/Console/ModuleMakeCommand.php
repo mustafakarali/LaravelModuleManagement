@@ -28,6 +28,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 */
 	protected $description = 'Create a new module (folder structure)';
 
+
 	/**
 	 * The type of class being generated.
 	 *
@@ -41,6 +42,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 * @var string
 	 */
 	protected $currentStub;
+	protected $type = null;
 
 
 	/**
@@ -139,7 +141,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 				$this->makeDirectory($path);
-				$this->files->put($path, $this->buildClass($name,null));
+				$this->files->put($path, $this->buildClass($name));
 				$folder .= 'tr\\';
 			}
 			elseif($type == 'view')
@@ -151,7 +153,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 				$this->makeDirectory($path);
-				$this->files->put($path, $this->buildClass($name, null));
+				$this->files->put($path, $this->buildClass($name));
 				$folder .= 'admin\\';
 			}
 			else
@@ -172,7 +174,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 		$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 		$this->makeDirectory($path);
-		$this->files->put($path, $this->buildClass($name, null));
+		$this->files->put($path, $this->buildClass($name));
 
 		if($type == 'controller')
 		{
@@ -182,7 +184,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				return $this->error($this->type.' already exists!');
 
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
-
+			$type = "api";
 			$this->makeDirectory($path);
 			$this->files->put($path, $this->buildClass($name, "api"));
 
@@ -195,7 +197,8 @@ class ModuleMakeCommand extends GeneratorCommand {
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-admin.stub';
 
 			$this->makeDirectory($path);
-			$this->files->put($path, $this->buildClass($name, "admin"));
+			$type = "admin";
+			$this->files->put($path, $this->buildClass($name));
 		}
 	}
 
@@ -216,21 +219,24 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 * @param  string  $name
 	 * @return string
 	 */
-	protected function buildClass($name, $type)
+	protected function buildClass($name)
 	{
 		if($type == null)
 		{
 			$stub = $this->files->get($this->getStub());
+			$type = null;
 			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
 		}
 		elseif($type == "admin")
 		{
 			$stub = $this->files->get($this->getStub());
+			$type = null;
 			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
 		}
 		elseif($type == "api")
 		{
 			$stub = $this->files->get($this->getStub());
+			$type = null;
 			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
 		}
 		
