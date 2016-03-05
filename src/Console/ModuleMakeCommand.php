@@ -44,12 +44,6 @@ class ModuleMakeCommand extends GeneratorCommand {
 	protected $currentStub;
 
 	/**
-		BuildClass type
-	**/
-	public $type = null;
-
-
-	/**
 	 * Execute the console command.
 	 *
 	 * @return void
@@ -188,7 +182,6 @@ class ModuleMakeCommand extends GeneratorCommand {
 				return $this->error($this->type.' already exists!');
 
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
-			$type = "api";
 			$this->makeDirectory($path);
 			$this->files->put($path, $this->buildClass($name, "api"));
 
@@ -201,7 +194,6 @@ class ModuleMakeCommand extends GeneratorCommand {
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-admin.stub';
 
 			$this->makeDirectory($path);
-			$type = "admin";
 			$this->files->put($path, $this->buildClass($name));
 		}
 	}
@@ -225,24 +217,20 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 */
 	protected function buildClass($name)
 	{
-		if($type == null)
-		{
 			$stub = $this->files->get($this->getStub());
-			$type = null;
-			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
-		}
-		elseif($type == "admin")
-		{
-			$stub = $this->files->get($this->getStub());
-			$type = null;
-			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
-		}
-		elseif($type == "api")
-		{
-			$stub = $this->files->get($this->getStub());
-			$type = null;
-			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
-		}
+			if($stub == "controller-admin")
+			{
+				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
+			}
+			elseif($stub == "controller-api.stub")
+			{
+				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
+			}
+			else
+			{
+				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+			}
+			
 		
 	}
 
