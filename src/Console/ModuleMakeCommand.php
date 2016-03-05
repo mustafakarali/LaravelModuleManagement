@@ -42,6 +42,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 * @var string
 	 */
 	protected $currentStub;
+	protected $stubName;
 
 	/**
 	 * Execute the console command.
@@ -137,6 +138,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 					return $this->error($this->type.' already exists!');
 
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
+				$this->stubName = $type.'.stub';
 
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
@@ -149,6 +151,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 					return $this->error($this->type.' already exists!');
 
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
+				$this->stubName = $type.'.stub';
 
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
@@ -170,21 +173,26 @@ class ModuleMakeCommand extends GeneratorCommand {
 			return $this->error($this->type.' already exists!');
 
 		$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
+		$this->stubName = $type.'.stub';
 
 		$this->makeDirectory($path);
 		$this->files->put($path, $this->buildClass($name));
 
 		if($type == 'controller')
 		{
+			// Api Controller Generate
+			
 			$filename = studly_case(class_basename($this->getNameInput())."Api".ucfirst($type));
 			$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
 			if ($this->files->exists($path = $this->getPath($name))) 
 				return $this->error($this->type.' already exists!');
 
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
+			$this->stubName = $type.'-api.stub';
 			$this->makeDirectory($path);
 			$this->files->put($path, $this->buildClass($name));
 
+			// Admin Controller Generate
 
 			$filename = studly_case(class_basename($this->getNameInput())."Admin".ucfirst($type));
 			$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
@@ -192,6 +200,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				return $this->error($this->type.' already exists!');
 
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-admin.stub';
+			$this->stubName = $type.'-admin.stub';
 
 			$this->makeDirectory($path);
 			$this->files->put($path, $this->buildClass($name));
@@ -218,11 +227,11 @@ class ModuleMakeCommand extends GeneratorCommand {
 	protected function buildClass($name)
 	{
 			$stub = $this->files->get($this->getStub());
-			if($stub == "controller-admin")
+			if($this->stubName == "controller-admin.stub")
 			{
 				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
 			}
-			elseif($stub == "controller-api.stub")
+			elseif($this->stubName == "controller-api.stub")
 			{
 				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
 			}
@@ -230,6 +239,9 @@ class ModuleMakeCommand extends GeneratorCommand {
 			{
 				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
 			}
+
+
+			
 			
 		
 	}

@@ -35,6 +35,7 @@ class DummyApiClass extends Controller {
 	public function store(Request $request)
 	{
 		$postCategory = $request->get('postCategory');
+		$apiPassword = $request->header('apiPassword');
 	}
 
 	/**
