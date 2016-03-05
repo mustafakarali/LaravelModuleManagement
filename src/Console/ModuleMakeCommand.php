@@ -183,7 +183,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 
 			$this->currentStub = __DIR__.'/stubs/'.$type.'-api.stub';
 			$this->makeDirectory($path);
-			$this->files->put($path, $this->buildClass($name, "api"));
+			$this->files->put($path, $this->buildClass($name));
 
 
 			$filename = studly_case(class_basename($this->getNameInput())."Admin".ucfirst($type));
