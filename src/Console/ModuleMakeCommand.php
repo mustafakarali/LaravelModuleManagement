@@ -130,6 +130,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 		{
 			$folder = ucfirst($type).'s\\';
 			$folder2 = ucfirst($type).'s\\';
+			$folder3 = ucfirst($type).'s\\';
 			if ($type === 'translation') 
 			{
 				$folder2 .= 'en\\';
@@ -146,18 +147,27 @@ class ModuleMakeCommand extends GeneratorCommand {
 			}
 			elseif($type == 'view')
 			{
+				$folder3 .= 'api\\';
+				$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder3.$filename);
+				if ($this->files->exists($path = $this->getPath($name))) 
+					return $this->error($this->type.' already exists!');
+
+				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
+				$this->stubName = $type.'.stub';
+				$this->makeDirectory($path);
+				$this->files->put($path, $this->buildClass($name));
+
+
 				$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
 				if ($this->files->exists($path = $this->getPath($name))) 
 					return $this->error($this->type.' already exists!');
 
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 				$this->stubName = $type.'.stub';
-
-				// Views / Admin
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
-				$folder .= 'admin\\';
 
+				$folder .= 'admin\\';
 			}
 			else
 			{
