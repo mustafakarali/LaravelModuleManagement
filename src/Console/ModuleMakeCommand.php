@@ -42,7 +42,11 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 * @var string
 	 */
 	protected $currentStub;
-	protected $type = null;
+
+	/**
+		BuildClass type
+	**/
+	public $type = null;
 
 
 	/**
