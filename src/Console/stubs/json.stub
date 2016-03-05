@@ -1,6 +1,11 @@
-{
-	name: "Text",
-	description: "Another text",
-	creator: "Another text"
-	customer: "General"
-}
+<?php
+
+return [
+
+
+    'name' => 'Text',
+    'description' => 'Description',
+    'creator' => 'Creator',
+    'customer' => 'Customer'
+
+];
