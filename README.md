@@ -35,6 +35,8 @@ laravel-project/
                 |-- index.blade.php
                 |-- admin/
                     |-- index.blade.php
+                |-- api/
+                    |-- index.blade.php
             |-- Translations/
                 |-- en/
                     |-- general.php

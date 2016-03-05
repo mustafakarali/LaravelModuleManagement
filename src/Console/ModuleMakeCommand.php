@@ -158,10 +158,6 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->files->put($path, $this->buildClass($name));
 				$folder .= 'admin\\';
 
-				// Views / Api
-				$this->makeDirectory($path);
-				$this->files->put($path, $this->buildClass($name));
-				$folder .= 'api\\';
 			}
 			else
 			{
