@@ -139,7 +139,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 				$this->makeDirectory($path);
-				$this->files->put($path, $this->buildClass($name));
+				$this->files->put($path, $this->buildClass($name,null));
 				$folder .= 'tr\\';
 			}
 			elseif($type == 'view')
@@ -151,7 +151,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 				$this->makeDirectory($path);
-				$this->files->put($path, $this->buildClass($name));
+				$this->files->put($path, $this->buildClass($name, null));
 				$folder .= 'admin\\';
 			}
 			else
@@ -172,7 +172,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 		$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 
 		$this->makeDirectory($path);
-		$this->files->put($path, $this->buildClass($name));
+		$this->files->put($path, $this->buildClass($name, null));
 
 		if($type == 'controller')
 		{
