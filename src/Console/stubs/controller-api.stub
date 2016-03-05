@@ -2,8 +2,16 @@
 
 use DummyRootNamespaceHttp\Requests;
 use DummyRootNamespaceHttp\Controllers\Controller;
-
 use Illuminate\Http\Request;
+
+// Frameworks
+use File;
+use Auth;
+use Validator;
+use DB;
+
+// Models
+
 
 class DummyApiClass extends Controller {
 

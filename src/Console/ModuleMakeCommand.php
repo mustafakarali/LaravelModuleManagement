@@ -74,8 +74,8 @@ class ModuleMakeCommand extends GeneratorCommand {
 		// Create Helper file
 		$this->generate('helper');
 
-		// JSON
-		$this->generate('json');
+		// Create Details file
+		$this->generate('details');
 
 
 
@@ -118,21 +118,24 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$filename = 'helper';
 				break;
 
-			case 'json':
-				$filename = 'module';
+			case 'details':
+				$filename = 'details';
 				break;
 		}
 
-		// $suffix = ($type == 'controller') ? ucfirst($type) : '';
-		//$folder = ($type != 'routes' && $type != 'helper') ? ucfirst($type).'s\\'. ($type === 'translation' ? 'en\\':'') : '';
 
-		if ($type != 'routes' && $type != 'helper' && $type != 'json') 
+		if ($type != 'routes' && $type != 'helper' && $type != 'details') 
 		{
+
+			// Folder Variables
 			$folder = ucfirst($type).'s\\';
 			$folder2 = ucfirst($type).'s\\';
 			$folder3 = ucfirst($type).'s\\';
+
+
 			if ($type === 'translation') 
 			{
+				// English Folder
 				$folder2 .= 'en\\';
 				$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder2.$filename);
 				if ($this->files->exists($path = $this->getPath($name))) 
@@ -143,10 +146,13 @@ class ModuleMakeCommand extends GeneratorCommand {
 
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
+
+				// Turkish Folder
 				$folder .= 'tr\\';
 			}
 			elseif($type == 'view')
 			{
+				// API Folder
 				$folder3 .= 'api\\';
 				$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder3.$filename);
 				if ($this->files->exists($path = $this->getPath($name))) 
@@ -167,6 +173,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
 
+				// ADMIN Folder
 				$folder .= 'admin\\';
 			}
 			else
@@ -238,23 +245,21 @@ class ModuleMakeCommand extends GeneratorCommand {
 	 */
 	protected function buildClass($name)
 	{
-			$stub = $this->files->get($this->getStub());
-			if($this->stubName == "controller-admin.stub")
-			{
-				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
-			}
-			elseif($this->stubName == "controller-api.stub")
-			{
-				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
-			}
-			else
-			{
-				return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
-			}
+		$stub = $this->files->get($this->getStub());
 
-
-			
-			
+		//  Change stub file and replace functions
+		if($this->stubName == "controller-admin.stub")
+		{
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceAdminClass($stub, $name);
+		}
+		elseif($this->stubName == "controller-api.stub")
+		{
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceApiClass($stub, $name);
+		}
+		else
+		{
+			return $this->replaceName($stub, $this->getNameInput())->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+		}
 		
 	}
 
