@@ -45,7 +45,7 @@ laravel-project/
                     |-- general.php
             |-- routes.php
             |-- helper.php
-            |-- module.php
+            |-- details.php
 ```
 
 ## Config 
