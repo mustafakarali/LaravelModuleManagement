@@ -153,9 +153,15 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->currentStub = __DIR__.'/stubs/'.$type.'.stub';
 				$this->stubName = $type.'.stub';
 
+				// Views / Admin
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
 				$folder .= 'admin\\';
+
+				// Views / Api
+				$this->makeDirectory($path);
+				$this->files->put($path, $this->buildClass($name));
+				$folder .= 'api\\';
 			}
 			else
 			{
