@@ -5,6 +5,8 @@ return [
 
     'name' => 'DummyUCtitle',
     'description' => '',
+    'icon' => 'fa fa-get-pocket',
+    'category' => 'General',
     'creator' => 'Anonymous',
     'customer' => 'General'
 
