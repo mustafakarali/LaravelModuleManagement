@@ -4,6 +4,7 @@ return [
 
 
     'name' => 'DummyUCtitle',
+    'displayName' => 'DummyUCtitle'
     'description' => '',
     'icon' => 'fa fa-get-pocket',
     'category' => 'General',
