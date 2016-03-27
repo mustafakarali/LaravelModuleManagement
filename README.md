@@ -33,7 +33,8 @@ laravel-project/
             |-- Models/
                 |-- FooBar.php
             |-- Views/
-                |-- index.blade.php
+                |-- default/
+                    |-- index.blade.php
                 |-- admin/
                     |-- index.blade.php
                 |-- api/
@@ -50,9 +51,27 @@ laravel-project/
 
 ## Config 
 
-Getting to module management config file:
+Getting to module config file and generators:
 ```
 php artisan vendor:publish
+```
+
+Files
+
+
+```
+laravel-project/
+    config/
+    |-- modulemanagement.php
+    app/
+    |-- BaseHelpers.php
+    |-- Http/
+        |-- Controllers/
+            |-- AdminTemplateController.php
+            |-- MainTemplateController.php
+            |-- AdminController.php
+            |-- MainController.php
+
 ```
 
 ### General
