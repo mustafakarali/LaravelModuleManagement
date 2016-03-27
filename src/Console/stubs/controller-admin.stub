@@ -9,6 +9,7 @@ use File;
 use Auth;
 use Validator;
 use DB;
+use Config;
 
 // Models
 
