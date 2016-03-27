@@ -27,6 +27,15 @@ class ModuleServiceProvider extends ServiceProvider {
 		$this->publishes([__DIR__.'/Config/modulemanagement.php' => config_path('modulemanagement.php'),
 		], 'config');
 
+		$this->publishes([
+			__DIR__.'/App/Http/Controllers/AdminTemplateController.php' => app_path('/Http/Controllers/AdminTemplateController.php'),
+			__DIR__.'/App/Http/Controllers/AdminController.php' => app_path('/Http/Controllers/AdminController.php'),
+			__DIR__.'/App/Http/Controllers/MainController.php' => app_path('/Http/Controllers/MainController.php'),
+			__DIR__.'/App/Http/Controllers/MainTemplateController.php' => app_path('/Http/Controllers/MainTemplateController.php'),
+			__DIR__.'/App/BaseHelpers.php' => app_path('BaseHelpers.php'),
+
+		], 'app');
+
 
 		if(is_dir(app_path().'/Modules/')) {
 
