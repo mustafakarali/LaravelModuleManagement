@@ -90,7 +90,8 @@ class DummyAdminClass extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		return view("DummyUCtitle::admin.edit")
+		->with('id', $id);
 	}
 
 	/**
@@ -112,7 +113,9 @@ class DummyAdminClass extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		return view("DummyUCtitle::admin.destroy")
+		->with('id', $id);
 	}
 
 }

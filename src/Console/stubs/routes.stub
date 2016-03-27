@@ -4,7 +4,11 @@ Route::group(array('module' => 'DummyUCtitle', 'middleware' =>  ['web'], 'namesp
 
 	// Custom Gets
     Route::get('/admin/modules/DummyTitle', array('uses' => 'DummyUCtitleAdminController@index', 'as' => 'admin.DummyTitle.index'));
+    Route::get('/admin/modules/DummyTitle/{id}/delete', array('uses' => 'DummyUCtitleAdminController@destroy', 'as' => 'admin.DummyTitle.destroy'));
+    Route::get('/admin/modules/DummyTitle/{id}/edit', array('uses' => 'DummyUCtitleAdminController@edit', 'as' => 'admin.DummyTitle.edit'));
     Route::get('/admin/modules/DummyTitle/{id}', array('uses' => 'DummyUCtitleAdminController@show', 'as' => 'admin.DummyTitle.show'));
+    Route::get('/admin/modules/DummyTitle/create', array('uses' => 'DummyUCtitleAdminController@create', 'as' => 'admin.DummyTitle.create'));
+
 
     // Custom Posts
     Route::post('/admin/modules/DummyTitle/', array('uses' => 'DummyUCtitleAdminController@store', 'as' => 'admin.DummyTitle.store'));
