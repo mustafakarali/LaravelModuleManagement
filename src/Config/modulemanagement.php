@@ -8,6 +8,7 @@
 *************************/
 
 return [
+	'theme' => 'default',
     'enabledModules' => array(
 
     ),
