@@ -163,7 +163,8 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->makeDirectory($path);
 				$this->files->put($path, $this->buildClass($name));
 
-
+				$oldfolder = $folder;
+				$folder .= 'default\\';
 				$name = $this->parseName('Modules\\'.studly_case(ucfirst($this->getNameInput())).'\\'.$folder.$filename);
 				if ($this->files->exists($path = $this->getPath($name))) 
 					return $this->error($this->type.' already exists!');
@@ -174,7 +175,7 @@ class ModuleMakeCommand extends GeneratorCommand {
 				$this->files->put($path, $this->buildClass($name));
 
 				// ADMIN Folder
-				$folder .= 'admin\\';
+				$folder = $oldfolder.'admin\\';
 			}
 			else
 			{
